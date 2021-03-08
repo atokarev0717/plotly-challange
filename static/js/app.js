@@ -26,9 +26,9 @@ function plot() {
              orientation: "h",
             };
         
-        var data = [trace1];
+        var data1 = [trace1];
 
-        var layout = {
+        var layout1 = {
             title: "TOP 10 OTU",
             yaxis: {
                 tickmode: "linear"            
@@ -36,8 +36,33 @@ function plot() {
 
             };
 
-        Plotly.newPlot("bar", data, layout);
-          
+        Plotly.newPlot("bar", data1, layout1);
+
+
+        // Bubble chart settings 
+        var trace2 = {
+            x: data.samples[0].otu_ids,
+            y: data.samples[0].sample_values,
+            mode: "markers",
+            marker: {
+                size: data.samples[0].sample_values,
+                color: data.samples[0].otu_ids
+            },
+            text:  data.samples[0].otu_labels
+
+        };
+
+        // bubble plot layout
+        var layout2 = {
+            xaxis:{title: "OTU ID"},
+        };
+
+        // creating data variable 
+        var data2 = [trace2];
+
+    // create the bubble plot
+    Plotly.newPlot("bubble", data2, layout2); 
+
 
 
     });
@@ -45,3 +70,5 @@ function plot() {
 };
 
 plot()
+
+
