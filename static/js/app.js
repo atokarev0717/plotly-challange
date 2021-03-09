@@ -74,12 +74,31 @@ function plot() {
     // create the bubble plot
     Plotly.newPlot("bubble", data2, layout2); 
 
-
-
     });
 
 };
 
+function get_demographic_info(id) {
+        d3.json("samples.json").then((data)=> {
+            var metadata = data.metadata;
+            console.log(metadata)
+    
+          // filter the data by id
+           var filtered_data = metadata.filter(meta => meta.id.toString() === id)[0];
+          // select demographic panel to put data
+           var demographic_info = d3.select("#sample-metadata");
+            
+         // empty the demographic info panel each time before getting new id info
+           demographic_info.html("");
+    
+         // grab the necessary demographic data data for the id and append the info to the panel
+            Object.entries(filtered_data).forEach((key) => {   
+                demographic_info.append("h5").text(key[0] + ": " + key[1] + "\n");    
+            });
+        });
+    }
+
 plot();
+get_demographic_info('940');
 
 
