@@ -1,3 +1,14 @@
+d3.json("./samples.json").then(data => {
+    console.log(data);
+
+//enter IDs into the dropdown menue on html page
+    data.names.forEach(IDs => {
+        var dropdown = d3.select("#selDataset");
+        dropdown.append("option").text(IDs)
+    });
+    
+});
+
 function plot() {
     // Using D3 to read the JSON file
     d3.json("./samples.json").then(data => {
@@ -69,6 +80,6 @@ function plot() {
 
 };
 
-plot()
+plot();
 
 
